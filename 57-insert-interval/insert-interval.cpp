@@ -7,7 +7,7 @@ int n = intervals.size();
   
 
         vector<vector<int>> ans;
- if(n == 0) ans.push_back(newInterval);
+ if(n == 0) return {newInterval};
        int i = 0;
        
 
