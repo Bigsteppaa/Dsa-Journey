@@ -27,7 +27,5 @@ return ans;
           rec(node->right,lvl+1,ans);
           rec(node->left,lvl+1,ans);
 
-
-
     }
 };
