@@ -69,7 +69,7 @@ return need;
                             vis[temp->right] = true;
                             af = 1;
                           }
-                          if(mp.count(temp) && !vis[mp[temp]]){
+                          if(mp[temp] && !vis[mp[temp]]){
 
                             q.push(mp[temp]);
                             vis[mp[temp]] = true;
