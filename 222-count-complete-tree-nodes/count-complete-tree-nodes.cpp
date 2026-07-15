@@ -12,21 +12,34 @@
 class Solution {
 public:
     int countNodes(TreeNode* root) {
-        return count(root,0);
+        if(!root) return 0;
+
+        int lh = findl(root);
+        int rh = findr(root);
+        if(lh == rh) return (1 << lh)-1;
+
+        return 1 + countNodes(root->left) + countNodes(root->right);
         
     }
 
-   int count(TreeNode* root,int cnt){
-      
-  if(!root) return 0;
+    int findl(TreeNode* root){
+       int high = 0;
+       while(root){
+         high++;
+         root = root->left;
+       }
+       return high;
 
-    cnt = 1;
-    cnt += count(root->left,cnt);
-    cnt += count(root->right,cnt);
+    }
+    
+    int findr(TreeNode* root){
+       int high = 0;
+       while(root){
+         high++;
+         root = root->right;
+       }
+       return high;
 
-
-return cnt;
-
-   }
+    }
 
 };
