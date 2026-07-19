@@ -18,11 +18,10 @@ public:
             mp[inorder[i]] = i;
         }
         
-        TreeNode* root = build(preorder,0,preorder.size()-1,
-        inorder,0,inorder.size()-1,mp);
+        TreeNode* root = build(preorder,0,preorder.size()-1,0,inorder.size()-1,mp);
         return root;
     }
-    TreeNode* build(vector<int>& preorder,int pst,int pend, vector<int>& inorder,int ist,int iend,map<int,int>& mp){
+    TreeNode* build(vector<int>& preorder,int pst,int pend,int ist,int iend,map<int,int>& mp){
 
           if(pst>pend || ist>iend) return NULL;
      
@@ -33,9 +32,9 @@ public:
 
 
 
-      root->left = build(preorder,pst+1,pst+lefts,inorder,ist,irt-1,
+      root->left = build(preorder,pst+1,pst+lefts,ist,irt-1,
       mp);
-       root->right = build(preorder,pst+lefts+1,pend,inorder,irt+1,iend,
+       root->right = build(preorder,pst+lefts+1,pend,irt+1,iend,
       mp);
 
  
