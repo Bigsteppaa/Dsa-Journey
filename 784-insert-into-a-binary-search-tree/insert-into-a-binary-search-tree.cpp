@@ -21,13 +21,13 @@ public:
            if(root->val > val){
              if(root->left) root = root->left;
              else {root->left = node;
-             break;}
+             return ruut;}
 
            }
            else{
             if(root->right) root = root->right;
              else {root->right = node;
-             break;}
+             return ruut;}
 
            }
 
