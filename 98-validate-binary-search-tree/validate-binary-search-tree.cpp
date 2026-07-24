@@ -12,41 +12,21 @@
 class Solution {
 public:
     bool isValidBST(TreeNode* root) {
+      
+        return check(root,LLONG_MIN,LLONG_MAX);
+        
+    }
+    bool check(TreeNode* root,long long lb,long long hb){
         if(!root) return true;
-         long long el = LLONG_MIN;
-         int r = 0;
-       
-        TreeNode* curr = root;
-       while(curr){
-          if(!curr->left){
-            if(curr->val<=el) r = 1;
-               el = curr->val;
-               curr = curr->right;
-          }
-          else{
-            TreeNode* prev = curr->left;
 
-        while(prev->right && prev->right != curr){
-            prev = prev->right;
-        }
-        if(!prev->right){
-            prev->right = curr;
-              curr = curr->left;
-        }
-        else{
-                prev->right = NULL;
-                if(curr->val<=el) r = 1;
-               el = curr->val;
+          if(root->val <=lb || root->val >=hb ) return false;
+
+         return  check(root->left,lb,root->val) &&
+          check(root->right,root->val,hb);
+
           
-                curr = curr->right;
-
-        }
+          
 
 
-          }
-
-
-       }
-        return r != 1;
     }
 };
