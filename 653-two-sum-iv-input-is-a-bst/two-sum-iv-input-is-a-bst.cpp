@@ -9,37 +9,61 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+        class Gettree {
+            public:
+                 stack<TreeNode*> st;
+                 bool flag = true;
+
+                 Gettree(TreeNode* root,bool isr){
+                     flag = isr;
+                    pushall(root,flag);
+                   
+                 }
+
+                 bool hasnext(){
+                    return !st.empty();
+                 }
+
+                 int next(){
+                   TreeNode* node = st.top();
+                   st.pop();
+                   if(!flag) pushall(node->right,flag);
+                   else pushall(node->left,flag);
+
+
+                      return node->val;
+
+                 }
+
+                 private:
+                 void pushall(TreeNode* node,bool flag){
+                    if(!flag) for(;node != NULL;st.push(node),node=node->left);
+                    else for(;node != NULL;st.push(node),node=node->right);
+
+                 }
+
+                
+        } ;
+
+
 class Solution {
 public:
     bool findTarget(TreeNode* root, int k) {
-           unordered_set<int> set;
-           int flag = 0;
-        while(root){
-        if(!root->left){
-           
-            if(set.count(k - root->val)) flag = 1;
-               set.insert(root->val);
-                root = root->right;
-        }
-        else{
-          TreeNode* prev = root->left;
+        if(!root) return false;
 
-          while(prev->right && prev->right != root) prev = prev->right;
-            
-            if(prev->right == root){
-                prev->right = NULL;
-                 if(set.count(k - root->val)) flag = 1;
-               set.insert(root->val);
-                root = root->right;
-            }
-            else{
-                prev->right = root;
-                root = root->left;
-            }
-        }
+        Gettree  r(root,true);
+        Gettree l(root,false);
 
+        int left = l.next();
+        int right = r.next();
+
+        while(left<right){
+          if(left+right == k) return true;
+          else if(left+right>k){ if(r.hasnext())right = r.next(); else break; }
+          else{ if(l.hasnext()) left = l.next();
+          else break;
+          }
         }
-        return flag;
-        
+      return false;  
     }
 };
