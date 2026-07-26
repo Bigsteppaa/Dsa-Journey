@@ -2,23 +2,22 @@ class Solution {
 public:
     string frequencySort(string s) {
 
+        unordered_map <char,int> mp;
+        for(auto it : s) mp[it]++;
 
-        vector<int> freq(128,0);
+        vector<pair<char,int>> freq;
 
-        for(auto it : s){
-            freq[it]++;
-        }
+        for(auto [ch,fq] : mp)freq.push_back({ch,fq});
 
-        auto cmp = [&](char a,char b){
-
-           if(freq[a] == freq[b]) return a<b;
-
-           return freq[a]>freq[b];
-
+        auto cmp = [&](pair<char,int>&a,pair<char,int>&b){
+            return a.second>b.second;
         };
-        sort(s.begin(),s.end(),cmp);
+        sort(freq.begin(),freq.end(),cmp);
 
-        return s;
+        string ans = "";
+            for(auto [ch,fq] : freq) ans.append(fq,ch);
+
+
         
-    }
+return ans;    }
 };
