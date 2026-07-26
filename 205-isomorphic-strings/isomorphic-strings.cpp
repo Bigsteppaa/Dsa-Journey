@@ -1,28 +1,20 @@
 class Solution {
 public:
     bool isIsomorphic(string s, string t) {
-
-          map<char,char> mp;
+          
+          char mp_s[128] = {0};
+          char mp_t[128] = {0};
 
           for(int i = 0;i<s.size();i++){
 
-           if(!mp[s[i]]){
 
-            for(auto it : mp){
-                if(it.second == t[i]) return false;
-            }
-
-
-            mp[s[i]] = t[i];
-           }
-           else{
-            if(mp[s[i]] != t[i]) return false;
-           }
-
-          } 
+          if(mp_s[s[i]] != mp_t[t[i]] ) return false;
+          mp_s[s[i]] = mp_t[t[i]] = i+1;
 
 
 
-      return true;  
+          }
+
+            return true;
     }
 };
