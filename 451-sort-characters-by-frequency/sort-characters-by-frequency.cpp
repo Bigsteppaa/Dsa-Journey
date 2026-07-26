@@ -5,17 +5,20 @@ public:
         unordered_map <char,int> mp;
         for(auto it : s) mp[it]++;
 
-        vector<pair<char,int>> freq;
+        vector<vector<char>> freq(s.size()+1);
 
-        for(auto [ch,fq] : mp)freq.push_back({ch,fq});
+        for(auto [ch,fq] : mp)freq[fq].push_back(ch);
 
-        auto cmp = [&](pair<char,int>&a,pair<char,int>&b){
-            return a.second>b.second;
-        };
-        sort(freq.begin(),freq.end(),cmp);
+
 
         string ans = "";
-            for(auto [ch,fq] : freq) ans.append(fq,ch);
+
+        for(int i = s.size();i>=1;i--)
+            for(auto it : freq[i]) ans.append(i,it);
+
+
+        
+    
 
 
         
