@@ -2,9 +2,9 @@ class Solution {
 public:
     int maxProduct(vector<int>& nums) {
 
-        int mx1 = nums[0];
-        int mx2 = 0;
-        for(int i = 1;i<nums.size();i++){
+        int mx1 = max(nums[0],nums[1]);
+        int mx2 = min(nums[0],nums[1]);
+        for(int i = 2;i<nums.size();i++){
 
  
          
