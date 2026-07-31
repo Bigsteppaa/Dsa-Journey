@@ -8,8 +8,10 @@ public:
         int  ans = 0;
          for(int i = 0;i<26;i++){
            ans += freq[i]*((i/8)+1);
+           if(!freq[i]) break;
 
          }
+         
 
         return ans;
     }
