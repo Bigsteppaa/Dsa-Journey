@@ -13,7 +13,7 @@ public:
 
          }
              for(int i = minn+1;i<maxx;i++){
-                if(st.find(i) == st.end()) ans.push_back(i);
+                if(!st.count(i)) ans.push_back(i);
              }
 
         return ans;
