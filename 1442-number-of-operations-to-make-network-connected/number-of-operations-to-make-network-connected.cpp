@@ -51,36 +51,27 @@ public:
         Dsu ds(n);
 
         int cab = 0;
-        int count = 0;
+        
 
         for(auto &e : connections){
            if(ds.ult_p(e[0]) != ds.ult_p(e[1])){
             ds.uni(e[0],e[1]);
-            count++;
+            
            }
            else{
                   cab++;
            }
 
         }
-        if(count == n-1) return 0;
-        int ans = 0;
+       
+        int uc = 0;
 
-      for(int i = 0;i<n-1;i++){
-        if(!cab) return -1;
-        if(ds.ult_p(i) != ds.ult_p(i+1)){
-            ds.uni(i,i+1);
-
-            cab--;
-            ans++;
-            
-
-           }
-
-
+      for(int i = 0;i<n;i++){
+       if(ds.ult_p(i) == i) uc++;
+        
       }
 
-
-       return ans; 
+     return uc-1<=cab?uc-1 : -1;
+        
     }
 };
