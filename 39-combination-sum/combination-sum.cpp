@@ -5,10 +5,10 @@ public: void combo(int ind,vector<int>& candidates,vector<int>& temp,vector<vect
         if(sum == k) ans.push_back(temp);
         return;
       }
-            sum += candidates[ind];
+            
       temp.push_back(candidates[ind]);
-      combo(ind,candidates,temp,ans,k,sum);
-       sum -= candidates[ind];
+      combo(ind,candidates,temp,ans,k,sum+candidates[ind]);
+      
        temp.pop_back();
       combo(ind+1,candidates,temp,ans,k,sum);
      
