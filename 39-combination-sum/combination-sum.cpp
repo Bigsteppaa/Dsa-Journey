@@ -1,18 +1,20 @@
 class Solution {
-public: void combo(int ind,vector<int>& candidates,vector<int>& temp,vector<vector<int>>& ans,int k,int sum){
-      if(sum>k) return;
-      if(ind>=candidates.size()){
-        if(sum == k) ans.push_back(temp);
-        return;
+public: void combo(int ind,vector<int>& candidates,vector<int>& temp,vector<vector<int>>& ans,int k){
+      if( k == 0) {
+        ans.push_back(temp);
+        return;}
+      
+
+      for(int i = ind;i<candidates.size();i++){
+         if(candidates[i]>k) break;
+
+         temp.push_back(candidates[i]);
+         combo(i,candidates,temp,ans,k-candidates[i]);
+
+         temp.pop_back();
       }
             
-      temp.push_back(candidates[ind]);
-      combo(ind,candidates,temp,ans,k,sum+candidates[ind]);
-      
-       temp.pop_back();
-      combo(ind+1,candidates,temp,ans,k,sum);
-     
-   
+    
 
 }
 
@@ -22,7 +24,8 @@ public:
 
          vector<vector<int>> ans;
       vector<int> temp;
-        combo(0,candidates,temp,ans,target,0);
+         sort(candidates.begin(),candidates.end());
+        combo(0,candidates,temp,ans,target);
        
         return ans;
     }
