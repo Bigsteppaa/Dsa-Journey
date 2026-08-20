@@ -1,23 +1,17 @@
 class Solution {
-public: void permu(vector<int>& nums,vector<vector<int>> &ans,vector<int>& hash,vector<int>& ds){
+public: void permu(int ind,vector<int>& nums,vector<vector<int>> &ans){
 
-  if(ds.size() == nums.size()){
-    ans.push_back(ds);
-    return;
-  }
+    if(ind>=nums.size()){ans.push_back(nums);
+    return;}
      
-   for(int i = 0;i<nums.size();i++){
+   for(int i = ind;i<nums.size();i++){
 
-    if(!hash[i]){
-               hash[i] = !hash[i];
-               ds.push_back(nums[i]);
-              permu(nums,ans,hash,ds);
-              hash[i] = !hash[i];
-              ds.pop_back();
+    
+        swap(nums[ind],nums[i]);
+        permu(ind+1,nums,ans);
+        swap(nums[ind],nums[i]);
 
-    }
-
-
+    
    }
 
 
@@ -30,9 +24,7 @@ public: void permu(vector<int>& nums,vector<vector<int>> &ans,vector<int>& hash,
 public:
     vector<vector<int>> permute(vector<int>& nums) {
          vector<vector<int>> ans;
-         vector<int> ds;
-         vector<int> hash(nums.size(),0);
-        permu(nums,ans,hash,ds);
+        permu(0,nums,ans);
         return ans;
         
     }
