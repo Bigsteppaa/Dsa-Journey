@@ -9,7 +9,7 @@ public:
      vector<bool> dp(sum+1,false),curr(sum+1,false);
        dp[0] = true;
        curr[0] = true;
-       
+       if(nums[0]<=sum)dp[nums[0]] = true;
          int n = nums.size();
         
         
