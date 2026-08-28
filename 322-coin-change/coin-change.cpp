@@ -23,32 +23,33 @@ int r = INT_MAX;
 public:
     int coinChange(vector<int>& coins, int amount) {
         if(amount == 0) return 0;
-        vector<vector<int>> dp(coins.size(),vector<int>(amount+1,0));
+       vector<int> dp(amount+1,0);
         int n = coins.size();
         for(int j = 0;j<=amount;j++){
         if(j%coins[0] == 0){
-            dp[0][j] = j/coins[0];
+            dp[j] = j/coins[0];
         }
-        else dp[0][j] = 1e9;
+        else dp[j] = 1e9;
         }
 
         for(int i = 1;i<n;i++){
+            vector<int> curr(amount+1,0);
         for(int j = 1;j<=amount;j++){
 
          int r = INT_MAX;
-      if(coins[i]<=j) r = 1 + dp[i][j-coins[i]];
-      int l =  dp[i-1][j];
+      if(coins[i]<=j) r = 1 + curr[j-coins[i]];
+      int l =  dp[j];
        
 
-      dp[i][j] = min(l,r);
+        curr[j] = min(l,r);
 
 
         }
-
+ dp = curr;
         }
         
        
-   int ans = dp[n-1][amount];
+   int ans = dp[amount];
    if(ans>amount) return -1;
         return ans;
         
